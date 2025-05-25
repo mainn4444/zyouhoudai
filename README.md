@@ -38,6 +38,7 @@
             padding: 30px;
             text-align: center;
             border-bottom: 1px solid #dee2e6;
+            position: relative;
         }
 
         .header h1 {
@@ -52,26 +53,60 @@
             font-weight: 300;
         }
 
+        .teacher-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .teacher-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
         .quiz-container {
             padding: 40px;
         }
 
-        .start-screen, .result-screen {
+        .name-input-screen, .start-screen, .result-screen, .teacher-screen {
             text-align: center;
         }
 
-        .start-screen h2 {
+        .name-input-screen h2, .start-screen h2 {
             color: #333;
             margin-bottom: 25px;
             font-size: 1.4rem;
             font-weight: 500;
         }
 
-        .start-screen p {
+        .name-input-screen p, .start-screen p {
             color: #666;
             margin-bottom: 35px;
             line-height: 1.7;
             font-size: 0.95rem;
+        }
+
+        .name-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: #6c757d;
         }
 
         .drive-systems {
@@ -115,6 +150,11 @@
 
         .btn:hover {
             background-color: #555;
+        }
+
+        .btn:disabled {
+            background-color: #adb5bd;
+            cursor: not-allowed;
         }
 
         .question-screen {
@@ -224,6 +264,262 @@
             line-height: 1.5;
         }
 
+        .student-name-display {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* 教師用画面 */
+        .teacher-screen {
+            display: none;
+            text-align: left;
+        }
+
+        .teacher-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .teacher-header h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .teacher-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .results-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            border: 1px solid #dee2e6;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .results-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .results-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .score-cell {
+            font-weight: 600;
+        }
+
+        .score-excellent { color: #28a745; }
+        .score-good { color: #6c757d; }
+        .score-fair { color: #fd7e14; }
+        .score-poor { color: #dc3545; }
+
+        .no-results {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            font-style: italic;
+        }
+
+        /* パスワード入力ダイアログ */
+        .password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .password-dialog {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .password-dialog h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #6c757d;
+        }
+
+        .password-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+
+        /* 確認ダイアログ */
+        .confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .confirm-dialog {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            min-width: 350px;
+        }
+
+        .confirm-dialog h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .confirm-dialog p {
+            margin-bottom: 25px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        /* メッセージダイアログ */
+        .message-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .message-dialog {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .message-dialog h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .message-dialog p {
+            margin-bottom: 25px;
+            color: #666;
+            line-height: 1.5;
+        }
+
         @media (max-width: 600px) {
             .container {
                 margin: 10px;
@@ -244,6 +540,21 @@
             .drive-systems {
                 grid-template-columns: 1fr;
             }
+
+            .teacher-btn {
+                position: static;
+                margin-top: 15px;
+                width: auto;
+            }
+
+            .teacher-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .summary-stats {
+                grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
 </head>
@@ -252,11 +563,21 @@
         <div class="header">
             <h1>自動車駆動方式 確認問題</h1>
             <p>FF・FR・AWD（4WD）・MRの理解度をチェックしよう</p>
+            <button class="teacher-btn" onclick="showTeacherScreen()">教師用画面</button>
         </div>
 
         <div class="quiz-container">
+            <!-- 名前入力画面 -->
+            <div class="name-input-screen" id="nameInputScreen">
+                <h2>生徒情報入力</h2>
+                <p>クイズを開始する前に、お名前を入力してください。</p>
+                <input type="text" class="name-input" id="studentNameInput" placeholder="お名前を入力してください" maxlength="20">
+                <br>
+                <button class="btn" id="nameSubmitBtn" onclick="submitName()" disabled>次へ進む</button>
+            </div>
+
             <!-- スタート画面 -->
-            <div class="start-screen" id="startScreen">
+            <div class="start-screen" id="startScreen" style="display: none;">
                 <h2>駆動方式の基礎知識確認</h2>
                 <p>
                     自動車の駆動方式について学んだ内容の理解度を確認するクイズです。<br>
@@ -300,9 +621,103 @@
             <!-- 結果画面 -->
             <div class="result-screen" id="resultScreen">
                 <h2>お疲れ様でした</h2>
+                <div class="student-name-display" id="studentNameDisplay"></div>
                 <div class="score" id="finalScore"></div>
                 <div class="score-message" id="scoreMessage"></div>
                 <button class="btn" onclick="restartQuiz()">もう一度挑戦する</button>
+            </div>
+
+            <!-- 教師用画面 -->
+            <div class="teacher-screen" id="teacherScreen">
+                <div class="teacher-header">
+                    <h2>成績管理システム</h2>
+                    <p>生徒の学習結果を確認・管理できます</p>
+                </div>
+
+                <div class="teacher-controls">
+                    <div>
+                        <button class="btn" onclick="exportResults()">結果をCSVでダウンロード</button>
+                        <button class="btn" onclick="clearResults()">結果をクリア</button>
+                    </div>
+                    <button class="btn" onclick="backToQuiz()">クイズ画面に戻る</button>
+                </div>
+
+                <div class="results-summary">
+                    <h3>実施状況サマリー</h3>
+                    <div class="summary-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalStudents">0</div>
+                            <div class="stat-label">受験者数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="averageScore">0</div>
+                            <div class="stat-label">平均点</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="highestScore">0</div>
+                            <div class="stat-label">最高点</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="passRate">0%</div>
+                            <div class="stat-label">合格率(80%以上)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="resultsContainer">
+                    <table class="results-table" id="resultsTable">
+                        <thead>
+                            <tr>
+                                <th>受験順</th>
+                                <th>氏名</th>
+                                <th>得点</th>
+                                <th>正答率</th>
+                                <th>評価</th>
+                                <th>受験日時</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody">
+                        </tbody>
+                    </table>
+                    <div class="no-results" id="noResults">
+                        まだ受験結果がありません。<br>
+                        生徒がクイズを受験すると、ここに結果が表示されます。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- パスワード入力ダイアログ -->
+        <div class="password-overlay" id="passwordOverlay">
+            <div class="password-dialog">
+                <h3>教師用画面アクセス</h3>
+                <p>パスワードを入力してください</p>
+                <input type="password" class="password-input" id="passwordInput" placeholder="パスワードを入力" maxlength="10">
+                <div class="password-buttons">
+                    <button class="btn-cancel" onclick="cancelPasswordDialog()">キャンセル</button>
+                    <button class="btn" onclick="submitPassword()">ログイン</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 確認ダイアログ -->
+        <div class="confirm-overlay" id="confirmOverlay">
+            <div class="confirm-dialog">
+                <h3>確認</h3>
+                <p id="confirmMessage"></p>
+                <div class="confirm-buttons">
+                    <button class="btn-cancel" onclick="cancelConfirm()">キャンセル</button>
+                    <button class="btn-danger" onclick="executeConfirm()">削除する</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- メッセージダイアログ -->
+        <div class="message-overlay" id="messageOverlay">
+            <div class="message-dialog">
+                <h3 id="messageTitle">お知らせ</h3>
+                <p id="messageText"></p>
+                <button class="btn" onclick="closeMessage()">OK</button>
             </div>
         </div>
     </div>
@@ -404,14 +819,87 @@
                 options: ["エコカー", "軽自動車", "スポーツカー・高級車", "商用バン"],
                 correct: 2,
                 explanation: "FR車は運動性能に優れ、高級感のある走りを提供するため、スポーツカーや高級車に多く採用されます。"
-            },
-
+            }
         ];
 
+        // 生徒結果データを保存する配列
+        let studentResults = [];
+        
         let currentQuestion = 0;
         let score = 0;
         let selectedAnswer = null;
         let answered = false;
+        let studentName = '';
+
+        // 確認・メッセージダイアログ関数
+        let confirmCallback = null;
+
+        function showMessage(title, message) {
+            document.getElementById('messageTitle').textContent = title;
+            document.getElementById('messageText').textContent = message;
+            document.getElementById('messageOverlay').style.display = 'flex';
+        }
+
+        function closeMessage() {
+            document.getElementById('messageOverlay').style.display = 'none';
+        }
+
+        function showConfirm(message, callback) {
+            document.getElementById('confirmMessage').textContent = message;
+            document.getElementById('confirmOverlay').style.display = 'flex';
+            confirmCallback = callback;
+        }
+
+        function cancelConfirm() {
+            document.getElementById('confirmOverlay').style.display = 'none';
+            confirmCallback = null;
+        }
+
+        function executeConfirm() {
+            document.getElementById('confirmOverlay').style.display = 'none';
+            if (confirmCallback) {
+                confirmCallback();
+                confirmCallback = null;
+            }
+        }
+
+        // 名前入力の監視
+        document.addEventListener('DOMContentLoaded', function() {
+            const nameInput = document.getElementById('studentNameInput');
+            const nameSubmitBtn = document.getElementById('nameSubmitBtn');
+            const passwordInput = document.getElementById('passwordInput');
+
+            nameInput.addEventListener('input', function(e) {
+                nameSubmitBtn.disabled = e.target.value.trim() === '';
+            });
+
+            // Enterキーで名前送信
+            nameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && e.target.value.trim() !== '') {
+                    submitName();
+                }
+            });
+
+            // Enterキーでパスワード送信
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    submitPassword();
+                }
+            });
+        });
+
+        function submitName() {
+            const nameInput = document.getElementById('studentNameInput');
+            studentName = nameInput.value.trim();
+            
+            if (studentName === '') {
+                showMessage('エラー', 'お名前を入力してください。');
+                return;
+            }
+
+            document.getElementById('nameInputScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+        }
 
         function startQuiz() {
             document.getElementById('startScreen').style.display = 'none';
@@ -488,6 +976,7 @@
             document.getElementById('resultScreen').style.display = 'block';
             
             const percentage = Math.round((score / questions.length) * 100);
+            document.getElementById('studentNameDisplay').textContent = `${studentName}さんの結果`;
             document.getElementById('finalScore').textContent = `${score} / ${questions.length} (${percentage}%)`;
             
             let message = '';
@@ -504,11 +993,185 @@
             }
             
             document.getElementById('scoreMessage').textContent = message;
+
+            // 結果をデータに保存
+            saveResult(studentName, score, percentage);
+        }
+
+        function saveResult(name, score, percentage) {
+            const result = {
+                id: studentResults.length + 1,
+                name: name,
+                score: score,
+                totalQuestions: questions.length,
+                percentage: percentage,
+                date: new Date().toLocaleString('ja-JP'),
+                evaluation: getEvaluation(percentage)
+            };
+            
+            studentResults.push(result);
+        }
+
+        function getEvaluation(percentage) {
+            if (percentage >= 90) return '優秀';
+            if (percentage >= 80) return '良好';
+            if (percentage >= 70) return '普通';
+            if (percentage >= 60) return '要努力';
+            return '要指導';
         }
 
         function restartQuiz() {
             document.getElementById('resultScreen').style.display = 'none';
-            document.getElementById('startScreen').style.display = 'block';
+            document.getElementById('nameInputScreen').style.display = 'block';
+            document.getElementById('studentNameInput').value = '';
+            document.getElementById('nameSubmitBtn').disabled = true;
+        }
+
+        // 教師用機能
+        function showTeacherScreen() {
+            showPasswordDialog();
+        }
+
+        function showPasswordDialog() {
+            document.getElementById('passwordOverlay').style.display = 'flex';
+            document.getElementById('passwordInput').focus();
+        }
+
+        function cancelPasswordDialog() {
+            document.getElementById('passwordOverlay').style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+        }
+
+        function submitPassword() {
+            const password = document.getElementById('passwordInput').value;
+            
+            if (password !== '4444') {
+                showMessage('エラー', 'パスワードが間違っています。');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+                return;
+            }
+            
+            // パスワードが正しい場合
+            cancelPasswordDialog();
+            hideAllScreens();
+            document.getElementById('teacherScreen').style.display = 'block';
+            updateTeacherScreen();
+        }
+
+        function backToQuiz() {
+            hideAllScreens();
+            document.getElementById('nameInputScreen').style.display = 'block';
+        }
+
+        function hideAllScreens() {
+            document.getElementById('nameInputScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('questionScreen').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'none';
+            document.getElementById('teacherScreen').style.display = 'none';
+        }
+
+        function updateTeacherScreen() {
+            updateSummaryStats();
+            updateResultsTable();
+        }
+
+        function updateSummaryStats() {
+            const total = studentResults.length;
+            const average = total > 0 ? Math.round(studentResults.reduce((sum, r) => sum + r.percentage, 0) / total) : 0;
+            const highest = total > 0 ? Math.max(...studentResults.map(r => r.percentage)) : 0;
+            const passCount = studentResults.filter(r => r.percentage >= 80).length;
+            const passRate = total > 0 ? Math.round((passCount / total) * 100) : 0;
+
+            document.getElementById('totalStudents').textContent = total;
+            document.getElementById('averageScore').textContent = average + '%';
+            document.getElementById('highestScore').textContent = highest + '%';
+            document.getElementById('passRate').textContent = passRate + '%';
+        }
+
+        function updateResultsTable() {
+            const tbody = document.getElementById('resultsTableBody');
+            const noResults = document.getElementById('noResults');
+            const resultsTable = document.getElementById('resultsTable');
+
+            if (studentResults.length === 0) {
+                resultsTable.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            resultsTable.style.display = 'table';
+            noResults.style.display = 'none';
+
+            tbody.innerHTML = '';
+            
+            studentResults.forEach((result, index) => {
+                const row = tbody.insertRow();
+                const scoreClass = getScoreClass(result.percentage);
+                
+                row.innerHTML = `
+                    <td>${result.id}</td>
+                    <td>${result.name}</td>
+                    <td class="score-cell ${scoreClass}">${result.score}/${result.totalQuestions}</td>
+                    <td class="score-cell ${scoreClass}">${result.percentage}%</td>
+                    <td>${result.evaluation}</td>
+                    <td>${result.date}</td>
+                `;
+            });
+        }
+
+        function getScoreClass(percentage) {
+            if (percentage >= 90) return 'score-excellent';
+            if (percentage >= 80) return 'score-good';
+            if (percentage >= 70) return 'score-fair';
+            return 'score-poor';
+        }
+
+        function exportResults() {
+            if (studentResults.length === 0) {
+                showMessage('エラー', 'エクスポートする結果がありません。');
+                return;
+            }
+
+            const headers = ['受験順', '氏名', '得点', '総問題数', '正答率(%)', '評価', '受験日時'];
+            const csvContent = [
+                headers.join(','),
+                ...studentResults.map(result => [
+                    result.id,
+                    `"${result.name}"`,
+                    result.score,
+                    result.totalQuestions,
+                    result.percentage,
+                    `"${result.evaluation}"`,
+                    `"${result.date}"`
+                ].join(','))
+            ].join('\n');
+
+            const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', '駆動方式クイズ結果_' + new Date().toISOString().slice(0, 10) + '.csv');
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function clearResults() {
+            if (studentResults.length === 0) {
+                showMessage('エラー', 'クリアする結果がありません。');
+                return;
+            }
+
+            showConfirm('全ての結果データを削除しますか？この操作は取り消せません。', function() {
+                studentResults.length = 0; // 配列を空にする
+                updateTeacherScreen();
+                showMessage('完了', '結果データをクリアしました。');
+            });
         }
     </script>
 </body>
